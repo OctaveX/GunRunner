@@ -40,6 +40,42 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: jump_sprites_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 0
+        width: 37
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: jump_sprites_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 0
+        width: 37
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: jump_sprites_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 0
+        width: 37
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: jump_sprites_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 0
+        width: 37
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 
