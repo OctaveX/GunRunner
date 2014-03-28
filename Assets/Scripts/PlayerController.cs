@@ -44,18 +44,20 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update(){
-		float vMove = Input.GetAxis("Jump");
-		if(vMove > 0 && grounded && !jumpPressed){
-			rigidbody2D.AddForce(new Vector2(0, 600f));
+		float verticalMove = Input.GetAxis("Jump");
+		if(verticalMove > 0 && grounded && !jumpPressed){
+			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 15f);
 			grounded = false;
 			jumpPressed = true;
 		}
 
-		if (vMove == 0){
+		if (verticalMove == 0){
 			jumpPressed = false;
 		}
-		if (grounded)
-			jumpTime = 0.5f;
+
+		if(verticalMove == 0 && rigidbody2D.velocity.y > 9f){
+			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 9f);
+		}
 	}
 
 	void Flip(){
