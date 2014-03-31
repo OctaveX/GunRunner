@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour {
 			jumpPressed = false;
 		}
 
-		if(verticalMove == 0 && rigidbody2D.velocity.y > 9f){
-			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 9f);
+		if(verticalMove == 0 && rigidbody2D.velocity.y > 8f){
+			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 8f);
 		}
 	}
 
