@@ -12,20 +12,23 @@ public class PlayerControl : MonoBehaviour
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
 
+	//Jumping Variables
 	public float maxJumpV;
 	public float minJumpV;
 	private bool jumpPressed = false;
-	
+	private Transform groundCheck;			// A position marking where to check if the player is grounded.
+	private bool grounded = false;			// Whether or not the player is grounded.
+
+	//Movement
 	public float maxSpeed = 5f;				// The fastest the player can travel in the x axis.
+
+	//Audio and Taunting(maybe removed)
 	public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
-	
 	public AudioClip[] taunts;				// Array of clips for when the player taunts.
 	public float tauntProbability = 50f;	// Chance of a taunt happening.
 	public float tauntDelay = 1f;			// Delay for when the taunt should happen.
 
 	private int tauntIndex;					// The index of the taunts array indicating the most recent taunt.
-	private Transform groundCheck;			// A position marking where to check if the player is grounded.
-	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
 
 	bool playJumpAudio = false;
@@ -33,7 +36,7 @@ public class PlayerControl : MonoBehaviour
 	void Awake()
 	{
 		// Setting up references.
-		groundCheck = transform.Find("groundCheck");
+		groundCheck = transform.Find("groundCheckFront");
 		anim = GetComponent<Animator>();
 	}
 
@@ -41,7 +44,13 @@ public class PlayerControl : MonoBehaviour
 	void Update()
 	{
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
+		//CircleCollider2D bottom = CircleCollider2D.GetComponent();
+
+		grounded = Physics2D.Linecast(transform.position, transform.Find("groundCheck").position, 1 << LayerMask.NameToLayer("Ground"))
+			|| Physics2D.Linecast(transform.position, transform.Find("groundCheckFront").position, 1 << LayerMask.NameToLayer("Ground"))
+				|| Physics2D.Linecast(transform.position, transform.Find("groundCheckBack").position, 1 << LayerMask.NameToLayer("Ground"))
+				|| Physics2D.Linecast(transform.position, transform.Find("wallCheckFront").position, 1 << LayerMask.NameToLayer("Ground"))
+				|| Physics2D.Linecast(transform.position, transform.Find("wallCheckBack").position, 1 << LayerMask.NameToLayer("Ground"));  
 
 		float verticalMove = Input.GetAxis("Jump");
 		if(verticalMove > 0 && grounded && !jumpPressed){
@@ -51,10 +60,11 @@ public class PlayerControl : MonoBehaviour
 			playJumpAudio = true;
 
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, maxJumpV);
-			grounded = false;
+			//grounded = false;
 			jumpPressed = true;
 		}
-		
+
+		//Makes user press every time they want to jump
 		if (verticalMove == 0){
 			jumpPressed = false;
 		}
@@ -90,8 +100,7 @@ public class PlayerControl : MonoBehaviour
 			playJumpAudio = false;
 		}
 	}
-	
-	
+
 	void Flip ()
 	{
 		// Switch the way the player is labelled as facing.
@@ -102,6 +111,7 @@ public class PlayerControl : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
 
 
 	public IEnumerator Taunt()
