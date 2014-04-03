@@ -85,14 +85,6 @@ public class PlayerControl : MonoBehaviour
 
 		rigidbody2D.velocity = new Vector2(h * maxSpeed, rigidbody2D.velocity.y);
 
-		// If the input is moving the player right and the player is facing left...
-		if(h > 0 && !facingRight)
-			// ... flip the player.
-			Flip();
-		// Otherwise if the input is moving the player left and the player is facing right...
-		else if(h < 0 && facingRight)
-			// ... flip the player.
-			Flip();
 		if(playJumpAudio){
 			//Play a random jump audio clip.
 			int i = Random.Range(0, jumpClips.Length);
@@ -100,19 +92,6 @@ public class PlayerControl : MonoBehaviour
 			playJumpAudio = false;
 		}
 	}
-
-	void Flip ()
-	{
-		// Switch the way the player is labelled as facing.
-		facingRight = !facingRight;
-
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-	}
-
-
 
 	public IEnumerator Taunt()
 	{
