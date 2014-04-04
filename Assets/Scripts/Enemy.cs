@@ -15,6 +15,12 @@ public class Enemy : MonoBehaviour
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
+	float frontRadius = 0.2f;
+	public LayerMask whatIsObstacle;
+	private bool blocked = false;
+	private bool frontGrounded = false;
+
+
 	private bool dead = false;			// Whether or not the enemy is dead.
 	private Score score;				// Reference to the Score script.
 
@@ -24,7 +30,7 @@ public class Enemy : MonoBehaviour
 		// Setting up the references.
 		ren = transform.Find("body").GetComponent<SpriteRenderer>();
 		frontCheck = transform.Find("frontCheck").transform;
-		score = GameObject.Find("Score").GetComponent<Score>();
+		//score = GameObject.Find("Score").GetComponent<Score>();
 	}
 
 	void FixedUpdate ()
@@ -32,18 +38,14 @@ public class Enemy : MonoBehaviour
 		// Create an array of all the colliders in front of the enemy.
 		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, 1);
 
-		// Check each of the colliders.
-		foreach(Collider2D c in frontHits)
-		{
-			// If any of the colliders is an Obstacle...
-			if(c.tag == "Obstacle")
-			{
+		blocked = Physics2D.Linecast(transform.position, transform.Find("frontCheck").position, 1 << LayerMask.NameToLayer("Ground"));
+
+		frontGrounded = Physics2D.Linecast(transform.position, transform.Find("frontGroundCheck").position, 1 << LayerMask.NameToLayer("Ground"));
+
+		if(blocked || !frontGrounded){
 				// ... Flip the enemy and stop checking the other colliders.
 				Flip ();
-				break;
-			}
 		}
-
 		// Set the enemy's velocity to moveSpeed in the x direction.
 		rigidbody2D.velocity = new Vector2(transform.localScale.x * moveSpeed, rigidbody2D.velocity.y);	
 
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour
 		ren.sprite = deadEnemy;
 
 		// Increase the score by 100 points
-		score.score += 100;
+		//score.score += 100;
 
 		// Set dead to true.
 		dead = true;
