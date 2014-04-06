@@ -27,11 +27,53 @@ public class PlayerHealth : MonoBehaviour
 		healthScale = healthBar.transform.localScale;
 	}
 
+	void OnTriggerEnter2D(Collider2D col){
+		if(col.gameObject.tag == "EnemyBullet"){
+			// ... and if the time exceeds the time of the last hit plus the time between hits...
+			if (Time.time > lastHitTime + repeatDamagePeriod) 
+			{
+				// ... and if the player still has health...
+				if(health > 0f)
+				{
+					// ... take damage and reset the lastHitTime.
+					TakeDamage(col.transform); 
+					lastHitTime = Time.time; 
+				}
+				// If the player doesn't have health, do some stuff, let him fall into the river to reload the level.
+				else
+				{
+					// Find all of the colliders on the gameobject and set them all to be triggers.
+					Collider2D[] cols = GetComponents<Collider2D>();
+					foreach(Collider2D c in cols)
+					{
+						c.isTrigger = true;
+					}
+					
+					// Move all sprite parts of the player to the front
+					SpriteRenderer[] spr = GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer s in spr)
+					{
+						s.sortingLayerName = "UI";
+					}
+					
+					// ... disable user Player Control script
+					GetComponent<PlayerControl>().enabled = false;
+					
+					// ... disable the Gun script to stop a dead guy shooting a nonexistant bazooka
+					GetComponentInChildren<Gun>().enabled = false;
+					
+					// ... Trigger the 'Die' animation state
+					anim.SetTrigger("Die");
+				}
+			}
+		}
+	}
+
 
 	void OnCollisionEnter2D (Collision2D col)
 	{
 		// If the colliding gameobject is an Enemy...
-		if(col.gameObject.tag == "Enemy")
+		if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyFlyer")
 		{
 			// ... and if the time exceeds the time of the last hit plus the time between hits...
 			if (Time.time > lastHitTime + repeatDamagePeriod) 
