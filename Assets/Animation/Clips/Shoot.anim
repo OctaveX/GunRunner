@@ -17,22 +17,27 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: -.0417299271, y: .155818224, z: 1}
+        value: {x: -.25, y: 0, z: 0}
+        inSlope: {x: -.75, y: 0, z: 0}
+        outSlope: {x: -.75, y: 0, z: 0}
+        tangentMode: 52437027
+      - time: .200000003
+        value: {x: -.400000006, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
-      - time: .333333343
-        value: {x: .0711336136, y: .165223837, z: 1}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 0
+      - time: .400000006
+        value: {x: -.25, y: 0, z: 0}
+        inSlope: {x: .75, y: 0, z: 0}
+        outSlope: {x: .75, y: 0, z: 0}
+        tangentMode: 138615656
       m_PreInfinity: 2
       m_PostInfinity: 2
-    path: Bazooka
+    path: gunHolder
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
-  m_SampleRate: 3
+  m_SampleRate: 5
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -40,7 +45,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .333333343
+    m_StopTime: .400000006
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -59,57 +64,72 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -.0417299271
+        value: -.25
+        inSlope: -.75
+        outSlope: -.75
+        tangentMode: 10
+      - time: .200000003
+        value: -.400000006
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
-      - time: .333333343
-        value: .0711336136
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        tangentMode: 10
+      - time: .400000006
+        value: -.25
+        inSlope: .75
+        outSlope: .75
+        tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_LocalPosition.x
-    path: Bazooka
+    path: gunHolder
     classID: 4
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .155818224
+        value: 0
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
-      - time: .333333343
-        value: .165223837
+        tangentMode: 10
+      - time: .200000003
+        value: 0
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 10
+      - time: .400000006
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_LocalPosition.y
-    path: Bazooka
+    path: gunHolder
     classID: 4
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
-      - time: .333333343
-        value: 1
+        tangentMode: 10
+      - time: .200000003
+        value: 0
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 10
+      - time: .400000006
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_LocalPosition.z
-    path: Bazooka
+    path: gunHolder
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

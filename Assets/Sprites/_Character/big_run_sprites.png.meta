@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cfd1961fc16cd40308c998b05b19fe71
+guid: 4d14779f85f3c479f951aadd40ff4fcc
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -45,77 +45,59 @@ TextureImporter:
     compressionQuality: 50
   spriteSheet:
     sprites:
-    - name: right_arm
+    - name: big_run_sprites_0
       rect:
         serializedVersion: 2
         x: 15
-        y: 29
-        width: 8
-        height: 19
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: left_arm
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 33
-        width: 8
-        height: 15
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: gun
-      rect:
-        serializedVersion: 2
-        x: 53
-        y: 44
+        y: 0
         width: 34
-        height: 14
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: right_hand
+        height: 64
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: big_run_sprites_1
       rect:
         serializedVersion: 2
-        x: 6
-        y: 29
-        width: 7
-        height: 5
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: left_hand
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 30
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: right_leg
-      rect:
-        serializedVersion: 2
-        x: 10
+        x: 78
         y: 0
-        width: 12
-        height: 22
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: left_leg
+        width: 43
+        height: 63
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: big_run_sprites_2
       rect:
         serializedVersion: 2
-        x: 43
+        x: 140
         y: 0
-        width: 12
-        height: 22
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: torso
+        width: 41
+        height: 63
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: big_run_sprites_3
       rect:
         serializedVersion: 2
-        x: 25
-        y: 14
-        width: 15
-        height: 49
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        x: 200
+        y: 0
+        width: 45
+        height: 63
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: big_run_sprites_4
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 0
+        width: 40
+        height: 63
+      alignment: 7
+      pivot: {x: 0, y: 0}
+    - name: big_run_sprites_5
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 0
+        width: 40
+        height: 63
+      alignment: 7
+      pivot: {x: 0, y: 0}
   spritePackingTag: 
   userData: 
