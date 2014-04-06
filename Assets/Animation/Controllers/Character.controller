@@ -211,13 +211,13 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110267209}
   m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .00891041849
-  m_TransitionOffset: 0
+  m_TransitionDuration: .0089103831
+  m_TransitionOffset: .00930495281
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: Jump
     m_EventTreshold: 0
-    m_ExitTime: .583333373
+    m_ExitTime: .579999983
   m_Atomic: 0
   m_Solo: 0
   m_Mute: 0
@@ -263,10 +263,10 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Idle
-  m_Speed: 1
+  m_Speed: .25
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: 681a8afaadec3408687faa1ac36c335a, type: 2}
+  - {fileID: 7400000, guid: 02a022c2c4ad9440ca2716d23758b8d1, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 768, y: -48, z: 0}
   m_IKOnFeet: 0
@@ -356,7 +356,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: 54a6ce788f2e04938a8954f0c56f4ea7, type: 2}
+  - {fileID: 7400000, guid: af128839420804c8d8a0e376bec8524d, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 936, y: 96, z: 0}
   m_IKOnFeet: 0
