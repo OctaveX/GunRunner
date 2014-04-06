@@ -26,7 +26,7 @@ public class EnemyFlyer : MonoBehaviour {
 	
 	private bool dead = false;			// Whether or not the enemy is dead.
 	private Score score;				// Reference to the Score script.
-	
+	private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
 	
 	void Awake()
 	{
@@ -34,6 +34,9 @@ public class EnemyFlyer : MonoBehaviour {
 		ren = transform.Find("body").GetComponent<SpriteRenderer>();
 		frontCheck = transform.Find("frontCheck").transform;
 		//score = GameObject.Find("Score").GetComponent<Score>();
+
+		//Reference to pickup spawner script
+		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
 	}
 
 	void Update(){
@@ -71,11 +74,10 @@ public class EnemyFlyer : MonoBehaviour {
 	}
 
 	void Fire(){
-		//yield return new WaitForSeconds(5);
 		Rigidbody2D bulletInstance;
 		Vector3 temp = new Vector3(0, -5f);
 		
-		Vector3 launchPoint = new Vector3(transform.position.x, transform.position.y - 3);
+		Vector3 launchPoint = new Vector3(transform.position.x, transform.position.y - 1);
 		
 		bulletInstance = Instantiate(rocket, launchPoint, transform.rotation) as Rigidbody2D;
 		bulletInstance.velocity = transform.rotation * temp;
@@ -134,6 +136,7 @@ public class EnemyFlyer : MonoBehaviour {
 		// Instantiate the 100 points prefab at this point.
 		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 
+		pickupSpawner.DeliverPickup(transform.position);
 		Destroy(gameObject);
 	}
 	

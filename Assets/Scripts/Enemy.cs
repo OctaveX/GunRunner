@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
 	private bool dead = false;			// Whether or not the enemy is dead.
 	private Score score;				// Reference to the Score script.
-
+	private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
 	
 	void Awake()
 	{
@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
 		ren = transform.Find("body").GetComponent<SpriteRenderer>();
 		frontCheck = transform.Find("frontCheck").transform;
 		//score = GameObject.Find("Score").GetComponent<Score>();
+
+		//Reference to pickup spawner script
+		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
 	}
 
 	void FixedUpdate ()
@@ -110,8 +113,7 @@ public class Enemy : MonoBehaviour
 		// Instantiate the 100 points prefab at this point.
 		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 
-
-
+		pickupSpawner.DeliverPickup(transform.position);
 		Destroy(gameObject, 3);
 	}
 

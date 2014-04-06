@@ -10,6 +10,7 @@ public class PickupSpawner : MonoBehaviour
 	public float highHealthThreshold = 75f;		// The health of the player, above which only bomb crates will be delivered.
 	public float lowHealthThreshold = 25f;		// The health of the player, below which only health crates will be delivered.
 
+	public float dropRate = .2f;
 
 	private PlayerHealth playerHealth;			// Reference to the PlayerHealth script.
 
@@ -24,13 +25,12 @@ public class PickupSpawner : MonoBehaviour
 	void Start ()
 	{
 		// Start the first delivery.
-		StartCoroutine(DeliverPickup());
+		//StartCoroutine(DeliverPickup());
 	}
 
 
 	public IEnumerator DeliverPickup()
 	{
-		// Wait for the delivery delay.
 		yield return new WaitForSeconds(pickupDeliveryTime);
 
 		// Create a random x coordinate for the delivery in the drop range.
@@ -53,6 +53,28 @@ public class PickupSpawner : MonoBehaviour
 			// ... instantiate a random pickup at the drop position.
 			int pickupIndex = Random.Range(0, pickups.Length);
 			Instantiate(pickups[pickupIndex], dropPos, Quaternion.identity);
+		}
+	}
+	public void DeliverPickup(Vector3 position)
+	{	
+		float roll = Random.Range(0f, 1f);
+		Debug.Log(roll);
+		if(roll <= dropRate){
+			// If the player's health is above the high threshold...
+			if(playerHealth.health >= highHealthThreshold)
+				// ... instantiate a bomb pickup at the drop position.
+				Instantiate(pickups[0], position, Quaternion.identity);
+			// Otherwise if the player's health is below the low threshold...
+			else if(playerHealth.health <= lowHealthThreshold)
+				// ... instantiate a health pickup at the drop position.
+				Instantiate(pickups[1], position, Quaternion.identity);
+			// Otherwise...
+			else
+			{
+				// ... instantiate a random pickup at the drop position.
+				int pickupIndex = Random.Range(0, pickups.Length);
+				Instantiate(pickups[pickupIndex], position, Quaternion.identity);
+			}
 		}
 	}
 }
