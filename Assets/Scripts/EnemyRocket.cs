@@ -32,17 +32,6 @@ public class EnemyRocket : MonoBehaviour {
 			// Destroy the rocket.
 			Destroy (gameObject);
 		}
-		if(col.tag == "EnemyFlyer")
-		{
-			// ... find the Enemy script and call the Hurt function.
-			col.gameObject.GetComponent<EnemyFlyer>().Hurt();
-			
-			// Call the explosion instantiation.
-			OnExplode();
-			
-			// Destroy the rocket.
-			Destroy (gameObject);
-		}
 		// Otherwise if it hits a bomb crate...
 		else if(col.tag == "BombPickup")
 		{
@@ -55,12 +44,14 @@ public class EnemyRocket : MonoBehaviour {
 			// Destroy the rocket.
 			Destroy (gameObject);
 		}
-		// Otherwise if the player manages to shoot himself...
-//		else if(col.gameObject.tag != "Enemy" || col.gameObject.tag != "EnemyFlyer")
-//		{
-//			// Instantiate the explosion and destroy the rocket.
-//			OnExplode();
-//			Destroy (gameObject);
-//		}
+
+		else if(col.tag != "Enemy" || col.tag != "EnemyFlyer")
+		{
+			// ... find the Bomb script and call the Explode function.
+			OnExplode();
+			
+			// Destroy the rocket.
+			Destroy (gameObject);
+		}
 	}
 }

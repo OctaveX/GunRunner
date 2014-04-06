@@ -5,7 +5,11 @@ public class Gun : MonoBehaviour
 {
 	public Rigidbody2D rocket;				// Prefab of the rocket.
 	public float speed = 20f;				// The speed the rocket will fire at.
-	
+
+	//Variables to handle fire rate
+	private float lastFireTime = 0f;
+	public float fireRate = .1f;
+	private bool canFire = true;
 	
 	private PlayerControl playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
@@ -21,9 +25,16 @@ public class Gun : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetButtonDown("Fire1"))
+		if(Input.GetButton("Fire1"))
 		{
-			Fire();
+			if(Time.time > lastFireTime + fireRate) {
+				canFire = true;
+			}
+			if(canFire){
+				Fire();
+				lastFireTime = Time.time;
+				canFire = false;
+			}
 		}
 	}
 	
@@ -45,10 +56,9 @@ public class Gun : MonoBehaviour
 		if(AimScript.facingRight){
 			bulletInstance = Instantiate(rocket, transform.position, transform.rotation) as Rigidbody2D;
 			bulletInstance.velocity = transform.rotation * temp;
-
 		}
 		else{
-			bulletInstance = Instantiate(rocket, transform.position, Quaternion.Inverse(transform.rotation)) as Rigidbody2D;
+			bulletInstance = Instantiate(rocket, transform.position, Quaternion.Inverse(transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
 			bulletInstance.velocity = Quaternion.Inverse(transform.rotation) * -temp;
 		}
 		GameObject player = GameObject.Find("hero");

@@ -45,6 +45,8 @@ public class EnemyFlyer : MonoBehaviour {
 		}
 		if(canFire){
 			Fire();
+			lastFireTime = Time.time;
+			canFire = false;
 		}
 	}
 
@@ -79,11 +81,8 @@ public class EnemyFlyer : MonoBehaviour {
 		
 		Vector3 launchPoint = new Vector3(transform.position.x, transform.position.y - 1);
 		
-		bulletInstance = Instantiate(rocket, launchPoint, transform.rotation) as Rigidbody2D;
+		bulletInstance = Instantiate(rocket, launchPoint, transform.rotation * Quaternion.Euler(0, 0, -90)) as Rigidbody2D;
 		bulletInstance.velocity = transform.rotation * temp;
-		
-		lastFireTime = Time.time;
-		canFire = false;
 	}
 
 	public void Hurt()
