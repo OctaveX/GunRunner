@@ -110,6 +110,8 @@ public class Enemy : MonoBehaviour
 		// Instantiate the 100 points prefab at this point.
 		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 
+
+
 		Destroy(gameObject, 3);
 	}
 

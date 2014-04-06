@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour {
 	public LayerMask whatIsGround;
 
 	bool jumpPressed = false;
-	float jumpTime = 0.5f;
 
 	// Use this for initialization
 	void Start () {

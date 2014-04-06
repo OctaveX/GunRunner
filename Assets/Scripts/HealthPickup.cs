@@ -7,7 +7,7 @@ public class HealthPickup : MonoBehaviour
 	public AudioClip collect;				// The sound of the crate being collected.
 
 
-	private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
+	//private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
 	private Animator anim;					// Reference to the animator component.
 	private bool landed;					// Whether or not the crate has landed.
 
@@ -15,7 +15,7 @@ public class HealthPickup : MonoBehaviour
 	void Awake ()
 	{
 		// Setting up the references.
-		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
+		//pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
 		anim = transform.root.GetComponent<Animator>();
 	}
 
@@ -36,7 +36,7 @@ public class HealthPickup : MonoBehaviour
 			playerHealth.UpdateHealthBar();
 
 			// Trigger a new delivery.
-			pickupSpawner.StartCoroutine(pickupSpawner.DeliverPickup());
+			//pickupSpawner.StartCoroutine(pickupSpawner.DeliverPickup());
 
 			// Play the collection sound.
 			AudioSource.PlayClipAtPoint(collect,transform.position);

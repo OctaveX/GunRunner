@@ -45,10 +45,13 @@ public class Gun : MonoBehaviour
 		if(AimScript.facingRight){
 			bulletInstance = Instantiate(rocket, transform.position, transform.rotation) as Rigidbody2D;
 			bulletInstance.velocity = transform.rotation * temp;
+
 		}
 		else{
 			bulletInstance = Instantiate(rocket, transform.position, Quaternion.Inverse(transform.rotation)) as Rigidbody2D;
 			bulletInstance.velocity = Quaternion.Inverse(transform.rotation) * -temp;
 		}
+		GameObject player = GameObject.Find("hero");
+		//player.rigidbody2D.velocity = new Vector2(player.rigidbody2D.velocity.x, player.rigidbody2D.velocity.y + 10f);
 	}
 }

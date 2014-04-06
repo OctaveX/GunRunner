@@ -13,7 +13,7 @@ public class EnemyFlyer : MonoBehaviour {
 	
 	public Rigidbody2D rocket;				// Prefab of the rocket.
 	private float lastFireTime = 0f;
-	public float fireRate = 0.00000000000000001f;
+	public float fireRate = 1f;
 	private bool canFire = true;
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
@@ -37,13 +37,12 @@ public class EnemyFlyer : MonoBehaviour {
 	}
 
 	void Update(){
-//		if(Time.time > lastFireTime + fireRate) {
-//			canFire = true;
-//		}
-//		if(canFire){
-//
-//		}
-		Fire();
+		if(Time.time > lastFireTime + fireRate) {
+			canFire = true;
+		}
+		if(canFire){
+			Fire();
+		}
 	}
 
 	void FixedUpdate ()

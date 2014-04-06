@@ -21,8 +21,10 @@ public class AimAssist : MonoBehaviour {
 			this.transform.localRotation = Quaternion.Euler (new Vector3(0, 0, -angle - 180));
 		}
 
+
+		//Debug.Log(mouse_pos.x + " " + transform.position.x);
 		//If the input is moving the player right and the player is facing left...
-		if(mouse_pos.x > transform.position.x && !facingRight)
+		if(mouse_pos.x >= transform.position.x && !facingRight)
 			// ... flip the player.
 			Flip();
 		// Otherwise if the input is moving the player left and the player is facing right...
