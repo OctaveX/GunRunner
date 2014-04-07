@@ -43,9 +43,9 @@ public class Gun : MonoBehaviour
 		anim.SetTrigger("Shoot");
 		audio.Play();
 		
-		
 		// ... instantiate the rocket facing right and set it's velocity to the right. 
 		Rigidbody2D bulletInstance;
+		Rocket bullet;
 		
 		Vector3 temp = new Vector3(speed, 0);
 
@@ -61,6 +61,8 @@ public class Gun : MonoBehaviour
 		}
 		else{
 			bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
+			bullet = (Rocket)bulletInstance.GetComponent("Rocket");
+			bullet.bulletRange = .5f;
 			bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation) * -temp;
 		}
 		GameObject player = GameObject.Find("hero");

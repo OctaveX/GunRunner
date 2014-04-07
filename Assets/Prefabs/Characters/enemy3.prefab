@@ -145,7 +145,7 @@ MonoBehaviour:
   deathSpinMin: -100
   deathSpinMax: 100
   rocket: {fileID: 5000000, guid: 33ba6775e037f432185651490cc350c0, type: 2}
-  fireRate: 10
+  fireRate: 1
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 0
