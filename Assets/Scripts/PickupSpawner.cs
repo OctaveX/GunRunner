@@ -58,7 +58,6 @@ public class PickupSpawner : MonoBehaviour
 	public void DeliverPickup(Vector3 position)
 	{	
 		float roll = Random.Range(0f, 1f);
-		Debug.Log(roll);
 		if(roll <= dropRate){
 			// If the player's health is above the high threshold...
 			if(playerHealth.health >= highHealthThreshold)

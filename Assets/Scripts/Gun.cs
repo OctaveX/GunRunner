@@ -8,7 +8,7 @@ public class Gun : MonoBehaviour
 
 	//Variables to handle fire rate
 	private float lastFireTime = 0f;
-	public float fireRate = .1f;
+	private float fireRate = .1f;
 	private bool canFire = true;
 
 	public int gunType = 0;
@@ -58,29 +58,69 @@ public class Gun : MonoBehaviour
 		GameObject barrel = GameObject.Find("Barrel");
 		if(gunType == 1){
 			if(AimScript.facingRight){
-				for (int i = 45; i >= -45; i -= 25){
+				fireRate = 1f;
+				for (int i = 20; i >= -20; i -= 5){
 					bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation * Quaternion.Euler(0,0,i)) as Rigidbody2D;
 					bullet = (Rocket)bulletInstance.GetComponent("Rocket");
-					bullet.bulletRange = .2f;
+					bullet.bulletRange = .25f;
 					bulletInstance.velocity = barrel.transform.rotation * Quaternion.Euler(0,0,i) * temp ;
 				}
 			}
 			else{
-				for (int i = 45; i >= -45; i -= 25){
+				for (int i = 20; i >= -20; i -= 5){
 					bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation * Quaternion.Euler(0,0,i)) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
 					bullet = (Rocket)bulletInstance.GetComponent("Rocket");
-					bullet.bulletRange = .2f;
+					bullet.bulletRange = .25f;
 					bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation)  * Quaternion.Inverse(Quaternion.Euler(0,0,i)) * -temp;
 				}
 			}
 		}
-		else {
+		else if(gunType == 2){
+			if(AimScript.facingRight){
+				fireRate = .3f;
+				for (int i = 5; i >= -5; i -= 10){
+					bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation * Quaternion.Euler(0,0,i)) as Rigidbody2D;
+					bullet = (Rocket)bulletInstance.GetComponent("Rocket");
+					bullet.bulletRange = .5f;
+					bulletInstance.velocity = barrel.transform.rotation * Quaternion.Euler(0,0,i) * temp ;
+				}
+			}
+			else{
+				for (int i = 5; i >= -5; i -= 10){
+					bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation * Quaternion.Euler(0,0,i)) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
+					bullet = (Rocket)bulletInstance.GetComponent("Rocket");
+					bullet.bulletRange = .5f;
+					bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation)  * Quaternion.Inverse(Quaternion.Euler(0,0,i)) * -temp;
+				}
+			}
+		}
+		else if(gunType == 3){
+			fireRate = .1f;
 			if(AimScript.facingRight){
 				bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation) as Rigidbody2D;
+				bullet = (Rocket)bulletInstance.GetComponent("Rocket");
+				bullet.bulletRange = 1f;
 				bulletInstance.velocity = barrel.transform.rotation * temp;
 			}
 			else{
 				bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
+				bullet = (Rocket)bulletInstance.GetComponent("Rocket");
+				bullet.bulletRange = 1f;
+				bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation) * -temp;
+			}
+		}
+		else {
+			fireRate = .4f;
+			if(AimScript.facingRight){
+				bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation) as Rigidbody2D;
+				bullet = (Rocket)bulletInstance.GetComponent("Rocket");bullet.bulletRange = 2f;
+				bullet.bulletRange = .6f;
+				bulletInstance.velocity = barrel.transform.rotation * temp;
+			}
+			else{
+				bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
+				bullet = (Rocket)bulletInstance.GetComponent("Rocket");bullet.bulletRange = 2f;
+				bullet.bulletRange = .6f;
 				bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation) * -temp;
 			}
 		}

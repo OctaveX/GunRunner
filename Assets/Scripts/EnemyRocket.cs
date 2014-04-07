@@ -8,7 +8,7 @@ public class EnemyRocket : MonoBehaviour {
 	void Start () 
 	{
 		// Destroy the rocket after 2 seconds if it doesn't get destroyed before then.
-		Destroy(gameObject, 2);
+		Destroy(gameObject, 1);
 	}
 	
 	
@@ -45,7 +45,7 @@ public class EnemyRocket : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		else if(col.tag != "Enemy" && col.tag != "EnemyFlyer" && col.tag != "EnemyGunner" && col.tag != "Gun")
+		else if(col.tag != "Enemy" && col.tag != "EnemyFlyer" && col.tag != "EnemyGunner" && col.tag != "Gun" && col.tag != "Ground")
 		{
 			// ... find the Bomb script and call the Explode function.
 			OnExplode();

@@ -8,7 +8,7 @@ public class EnemyGun : MonoBehaviour
 
 	//Variables to handle fire rate
 	private float lastFireTime = 0f;
-	public float fireRate = .1f;
+	public float fireRate = 2f;
 	public bool canFire = true;
 	public bool isFiring = false;
 	

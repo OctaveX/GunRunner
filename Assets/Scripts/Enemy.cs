@@ -113,10 +113,10 @@ public class Enemy : MonoBehaviour
 		scorePos.y += 1.5f;
 
 		// Instantiate the 100 points prefab at this point.
-		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
+		//Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 
 		pickupSpawner.DeliverPickup(transform.position);
-		Destroy(gameObject, 3);
+		Destroy(gameObject, .5f);
 	}
 
 
