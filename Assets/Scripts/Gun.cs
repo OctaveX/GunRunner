@@ -53,13 +53,15 @@ public class Gun : MonoBehaviour
 		GameObject Aimer = GameObject.Find("gunHolder");
 		AimAssist AimScript = (AimAssist)Aimer.GetComponent("AimAssist");
 
+		GameObject barrel = GameObject.Find("Barrel");
+
 		if(AimScript.facingRight){
-			bulletInstance = Instantiate(rocket, transform.position, transform.rotation) as Rigidbody2D;
-			bulletInstance.velocity = transform.rotation * temp;
+			bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation) as Rigidbody2D;
+			bulletInstance.velocity = barrel.transform.rotation * temp;
 		}
 		else{
-			bulletInstance = Instantiate(rocket, transform.position, Quaternion.Inverse(transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
-			bulletInstance.velocity = Quaternion.Inverse(transform.rotation) * -temp;
+			bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
+			bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation) * -temp;
 		}
 		GameObject player = GameObject.Find("hero");
 		//player.rigidbody2D.velocity = new Vector2(player.rigidbody2D.velocity.x, player.rigidbody2D.velocity.y + 10f);
