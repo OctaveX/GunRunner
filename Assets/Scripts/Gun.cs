@@ -61,8 +61,8 @@ public class Gun : MonoBehaviour
 		}
 		else{
 			bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
-			bullet = (Rocket)bulletInstance.GetComponent("Rocket");
-			bullet.bulletRange = .5f;
+//			bullet = (Rocket)bulletInstance.GetComponent("Rocket");
+//			bullet.bulletRange = .2f;
 			bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation) * -temp;
 		}
 		GameObject player = GameObject.Find("hero");
