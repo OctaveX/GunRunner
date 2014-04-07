@@ -9,7 +9,6 @@ public class BombPickup : MonoBehaviour
 	private Animator anim;				// Reference to the animator component.
 	private bool landed = false;		// Whether or not the crate has landed yet.
 
-
 	void Awake()
 	{
 		// Setting up the reference.
@@ -25,9 +24,8 @@ public class BombPickup : MonoBehaviour
 			// ... play the pickup sound effect.
 			AudioSource.PlayClipAtPoint(pickupClip, transform.position);
 
-			// Increase the number of bombs the player has.
-			other.GetComponent<LayBombs>().bombCount++;
-
+			Gun gun = other.GetComponentInChildren<Gun>();
+			gun.gunType = Random.Range(1,1);
 			// Destroy the crate.
 			Destroy(transform.root.gameObject);
 		}

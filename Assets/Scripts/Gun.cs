@@ -10,7 +10,9 @@ public class Gun : MonoBehaviour
 	private float lastFireTime = 0f;
 	public float fireRate = .1f;
 	private bool canFire = true;
-	
+
+	public int gunType = 0;
+
 	private PlayerControl playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
 	
@@ -54,16 +56,33 @@ public class Gun : MonoBehaviour
 		AimAssist AimScript = (AimAssist)Aimer.GetComponent("AimAssist");
 
 		GameObject barrel = GameObject.Find("Barrel");
-
-		if(AimScript.facingRight){
-			bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation) as Rigidbody2D;
-			bulletInstance.velocity = barrel.transform.rotation * temp;
+		if(gunType == 1){
+			if(AimScript.facingRight){
+				for (int i = 45; i >= -45; i -= 25){
+					bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation * Quaternion.Euler(0,0,i)) as Rigidbody2D;
+					bullet = (Rocket)bulletInstance.GetComponent("Rocket");
+					bullet.bulletRange = .2f;
+					bulletInstance.velocity = barrel.transform.rotation * Quaternion.Euler(0,0,i) * temp ;
+				}
+			}
+			else{
+				for (int i = 45; i >= -45; i -= 25){
+					bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation * Quaternion.Euler(0,0,i)) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
+					bullet = (Rocket)bulletInstance.GetComponent("Rocket");
+					bullet.bulletRange = .2f;
+					bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation)  * Quaternion.Inverse(Quaternion.Euler(0,0,i)) * -temp;
+				}
+			}
 		}
-		else{
-			bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
-//			bullet = (Rocket)bulletInstance.GetComponent("Rocket");
-//			bullet.bulletRange = .2f;
-			bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation) * -temp;
+		else {
+			if(AimScript.facingRight){
+				bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation) as Rigidbody2D;
+				bulletInstance.velocity = barrel.transform.rotation * temp;
+			}
+			else{
+				bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
+				bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation) * -temp;
+			}
 		}
 		GameObject player = GameObject.Find("hero");
 		//player.rigidbody2D.velocity = new Vector2(player.rigidbody2D.velocity.x, player.rigidbody2D.velocity.y + 10f);
