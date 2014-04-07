@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour
+public class EnemyGunner : MonoBehaviour
 {
 	public float moveSpeed = 2f;		// The speed the enemy moves at.
 	public int HP = 2;					// How many times the enemy can be hit before it dies.
@@ -11,20 +11,21 @@ public class Enemy : MonoBehaviour
 	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
-	private Animator anim;
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
-	float frontRadius = 0.2f;
+	private float frontRadius = 0.2f;
 	public LayerMask whatIsObstacle;
 	private bool blocked = false;
 	private bool frontGrounded = false;
-
+	private Animator anim;
 
 	private bool dead = false;			// Whether or not the enemy is dead.
 	private Score score;				// Reference to the Score script.
 	private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
-	
+
+	GameObject enemyGunObject;
+
 	void Awake()
 	{
 		// Setting up the references.
@@ -34,37 +35,53 @@ public class Enemy : MonoBehaviour
 
 		//Reference to pickup spawner script
 		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
+
+		enemyGunObject = transform.Find("enemyWeaponHolder/enemyGun").gameObject;
 		anim = transform.root.gameObject.GetComponent<Animator> ();
 	}
 
 	void FixedUpdate ()
 	{
-		// Create an array of all the colliders in front of the enemy.
-		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, 1);
 
-		blocked = Physics2D.Linecast(transform.position, transform.Find("frontCheck").position, 1 << LayerMask.NameToLayer("Ground"));
+		EnemyGun enemyGun = enemyGunObject.GetComponent<EnemyGun>();
+		// Walk
+		if (!enemyGun.isFiring) {
+			transform.Find("enemyWeaponHolder").gameObject.GetComponent<EnemyAimAssist>().enabled = false;
 
-		frontGrounded = Physics2D.Linecast(transform.position, transform.Find("frontGroundCheck").position, 1 << LayerMask.NameToLayer("Ground"));
+			// Create an array of all the colliders in front of the enemy.
+			Collider2D[] frontHits = Physics2D.OverlapPointAll (frontCheck.position, 1);
 
-		if((blocked || !frontGrounded)&& !dead){
-				// ... Flip the enemy and stop checking the other colliders.
-				Flip ();
+			blocked = Physics2D.Linecast (transform.position, transform.Find ("frontCheck").position, 1 << LayerMask.NameToLayer ("Ground"));
+
+			frontGrounded = Physics2D.Linecast (transform.position, transform.Find ("frontGroundCheck").position, 1 << LayerMask.NameToLayer ("Ground"));
+
+			if ((blocked || !frontGrounded) && !dead) {
+					// ... Flip the enemy and stop checking the other colliders.
+					Flip ();
+			}
+			// Set the enemy's velocity to moveSpeed in the x direction.
+			rigidbody2D.velocity = new Vector2 (transform.localScale.x * moveSpeed, rigidbody2D.velocity.y);
+
 		}
-		// Set the enemy's velocity to moveSpeed in the x direction.
-		rigidbody2D.velocity = new Vector2(transform.localScale.x * moveSpeed, rigidbody2D.velocity.y);	
+		// Begin shooting
+		else{
+			transform.Find("enemyWeaponHolder").gameObject.GetComponent<EnemyAimAssist>().enabled = true;
+			rigidbody2D.velocity = new Vector2(0,0);
+		}
 		anim.SetFloat("enemySpeed", Mathf.Abs(rigidbody2D.velocity.x));
-
 		// If the enemy has one hit point left and has a damagedEnemy sprite...
-		if(HP == 1 && damagedEnemy != null)
+		if (HP == 1 && damagedEnemy != null)
 			// ... set the sprite renderer's sprite to be the damagedEnemy sprite.
 			ren.sprite = damagedEnemy;
-			
+
 		// If the enemy has zero or fewer hit points and isn't dead yet...
-		if(HP <= 0 && !dead)
+		if (HP <= 0 && !dead){
 			// ... call the death function.
 			Death ();
+			enemyGunObject.GetComponent<EnemyGun>().canFire = false;
+		}
 	}
-	
+
 	public void Hurt()
 	{
 		// Reduce the number of hit points by one.
@@ -116,15 +133,12 @@ public class Enemy : MonoBehaviour
 		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 
 		pickupSpawner.DeliverPickup(transform.position);
-		Destroy(gameObject, 3);
+		Destroy(gameObject, 0);
 	}
 
 
 	public void Flip()
 	{
-		// Multiply the x component of localScale by -1.
-		Vector3 enemyScale = transform.localScale;
-		enemyScale.x *= -1;
-		transform.localScale = enemyScale;
+		transform.Find("enemyWeaponHolder").gameObject.GetComponent<EnemyAimAssist>().Flip();
 	}
 }

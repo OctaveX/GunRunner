@@ -36,7 +36,18 @@ public class Rocket : MonoBehaviour
 			// Destroy the rocket.
 			Destroy (gameObject);
 		}
-		if(col.tag == "EnemyFlyer")
+		else if(col.tag == "EnemyGunner")
+		{
+			// ... find the Enemy script and call the Hurt function.
+			col.gameObject.GetComponent<EnemyGunner>().Hurt();
+			
+			// Call the explosion instantiation.
+			OnExplode();
+			
+			// Destroy the rocket.
+			Destroy (gameObject);
+		}
+		else if(col.tag == "EnemyFlyer")
 		{
 			// ... find the Enemy script and call the Hurt function.
 			col.gameObject.GetComponent<EnemyFlyer>().Hurt();
@@ -60,7 +71,7 @@ public class Rocket : MonoBehaviour
 			Destroy (gameObject);
 		}
 		// Otherwise if the player manages to shoot himself...
-		else if(col.gameObject.tag != "Player" && col.gameObject.tag != "Bullet")
+		else if(col.gameObject.tag != "Player" && col.gameObject.tag != "Bullet" && col.gameObject.tag != "Gun")
 		{
 			// Instantiate the explosion and destroy the rocket.
 			OnExplode();

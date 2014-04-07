@@ -45,7 +45,7 @@ public class EnemyRocket : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		else if(col.tag != "Enemy" || col.tag != "EnemyFlyer")
+		else if(col.tag != "Enemy" && col.tag != "EnemyFlyer" && col.tag != "EnemyGunner" && col.tag != "Gun")
 		{
 			// ... find the Bomb script and call the Explode function.
 			OnExplode();
