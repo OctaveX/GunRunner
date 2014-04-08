@@ -18,6 +18,10 @@ public class EnemyFlyer : MonoBehaviour {
 	public float fireRate = 1f;
 	private bool canFire = true;
 
+	private float travelTime = 2f;
+	private float lastFlipTime;
+	private bool canFlip = false;
+
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
 	float frontRadius = 0.2f;
@@ -60,9 +64,15 @@ public class EnemyFlyer : MonoBehaviour {
 		
 		blocked = Physics2D.Linecast(transform.position, transform.Find("frontCheck").position, 1 << LayerMask.NameToLayer("Ground"));
 
-		if(blocked){
+		if(Time.time > lastFlipTime + travelTime) {
+			canFlip = true;
+		}
+
+		if(blocked || canFlip){
 			// ... Flip the enemy and stop checking the other colliders.
 			Flip ();
+			lastFlipTime = Time.time;
+			canFlip = false;
 		}
 		// Set the enemy's velocity to moveSpeed in the x direction.
 		rigidbody2D.velocity = new Vector2(transform.localScale.x * moveSpeed, 0f);	
@@ -83,8 +93,10 @@ public class EnemyFlyer : MonoBehaviour {
 		Vector3 temp = new Vector3(0, -5f);
 		
 		Vector3 launchPoint = new Vector3(transform.position.x, transform.position.y - 1);
-		
+
 		bulletInstance = Instantiate(rocket, launchPoint, transform.rotation * Quaternion.Euler(0, 0, -180)) as Rigidbody2D;
+		EnemyRocket bullet = (EnemyRocket)bulletInstance.GetComponent("EnemyRocket");
+		bullet.bulletRange = 5f;
 		bulletInstance.velocity = transform.rotation * temp;
 	}
 
