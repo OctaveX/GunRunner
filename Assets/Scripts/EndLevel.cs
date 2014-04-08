@@ -20,6 +20,8 @@ public class EndLevel : MonoBehaviour {
 		finished = true;
 		AudioSource.PlayClipAtPoint(finishClip, transform.position);
 		GameObject.Find ("hero").GetComponent<PlayerControl> ().enabled = false;
+		PlayerControl.score += PlayerControl.runningScore;
+		PlayerControl.runningScore = 0;
 		yield return new WaitForSeconds (3);
 
 		if (PlayerControl.level < (Application.levelCount-2))

@@ -1,10 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/NGUI/Scripts/UI/UILabel.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerHealth.cs">
     <Files>
-      <File FileName="Assets/NGUI/Scripts/UI/UIFont.cs" Line="1" Column="1" />
-      <File FileName="Assets/NGUI/Scripts/UI/UILabel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerControl.cs" Line="14" Column="16" />
+      <File FileName="Assets/Scripts/EndLevel.cs" Line="23" Column="1" />
+      <File FileName="Assets/Scripts/QuitGame.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/HealthPickup.cs" Line="30" Column="4" />
+      <File FileName="Assets/Scripts/PlayerHealth.cs" Line="150" Column="34" />
+      <File FileName="Assets/Scripts/GuiOverlay.cs" Line="14" Column="3" />
+      <File FileName="Assets/Scripts/GameOver.cs" Line="11" Column="66" />
+      <File FileName="Assets/Scripts/StartGame.cs" Line="9" Column="29" />
+      <File FileName="Assets/Scripts/Enemy.cs" Line="90" Column="29" />
+      <File FileName="Assets/Scripts/EnemyGunner.cs" Line="108" Column="25" />
+      <File FileName="Assets/Scripts/EnemyFlyer.cs" Line="118" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

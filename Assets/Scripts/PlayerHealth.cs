@@ -147,6 +147,7 @@ public class PlayerHealth : MonoBehaviour
 		int i = Random.Range (0, deathClips.Length);
 		AudioSource.PlayClipAtPoint(deathClips[0], transform.position, 3.0f);
 		anim.SetTrigger("Die");
+		PlayerControl.runningScore = 0;
 
 		yield return new WaitForSeconds (3);
 		PlayerControl.lives--;

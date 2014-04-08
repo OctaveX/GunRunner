@@ -11,7 +11,9 @@ public class PlayerControl : MonoBehaviour
 	public AudioClip introSound;
 	public float introSoundVolume = 1.0f;
 	public static int score = 0;
+	public static int runningScore = 0;
 	public static int lives = 0;
+	public static int defaultLives = 3;
 	public static int level = 0;
 
 	//public Transform groundCheck;

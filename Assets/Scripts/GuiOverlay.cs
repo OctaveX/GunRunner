@@ -9,10 +9,10 @@ public class GuiOverlay : MonoBehaviour {
 		style.alignment = TextAnchor.MiddleLeft;
 		style.fontSize = 15;
 
-		int levelDisplayed = (PlayerControl.level < 0 ? 0 : PlayerControl.level) + 1;
+		int levelDisplayed = (PlayerControl.level < 0 ? 0 : PlayerControl.level);
 		int livesDisplayed = (PlayerControl.lives < 0 ? 0 : PlayerControl.lives);
 
-		GUI.Label (new Rect (5, 0, 200, 30), "Score: " + PlayerControl.score, style);
+		GUI.Label (new Rect (5, 0, 200, 30), "Score: " + (PlayerControl.score + PlayerControl.runningScore), style);
 		GUI.Label (new Rect (5, 15, 200, 30), "Lives: " + livesDisplayed, style);
 		GUI.Label (new Rect (5, 30, 200, 30), "Level: " + levelDisplayed, style);
 	}

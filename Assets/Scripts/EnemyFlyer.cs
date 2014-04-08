@@ -122,7 +122,7 @@ public class EnemyFlyer : MonoBehaviour {
 		ren.sprite = deadEnemy;
 		
 		// Increase the score
-		PlayerControl.score += points;
+		PlayerControl.runningScore += points;
 		
 		// Set dead to true.
 		dead = true;
