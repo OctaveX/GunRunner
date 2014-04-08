@@ -340,6 +340,7 @@ MonoBehaviour:
   deathSpinMin: -100
   deathSpinMax: 100
   deathVolume: .600000024
+  points: 300
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 4096

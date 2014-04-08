@@ -12,18 +12,17 @@ public class Enemy : MonoBehaviour
 	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
-	private Animator anim;
+	public int points;
 
+	private Animator anim;
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
 	float frontRadius = 0.2f;
 	public LayerMask whatIsObstacle;
 	private bool blocked = false;
 	private bool frontGrounded = false;
-
-
+	
 	private bool dead = false;			// Whether or not the enemy is dead.
-	private Score score;				// Reference to the Score script.
 	private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
 	
 	void Awake()
@@ -31,7 +30,6 @@ public class Enemy : MonoBehaviour
 		// Setting up the references.
 		ren = transform.Find("body").GetComponent<SpriteRenderer>();
 		frontCheck = transform.Find("frontCheck").transform;
-		//score = GameObject.Find("Score").GetComponent<Score>();
 
 		//Reference to pickup spawner script
 		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
@@ -88,8 +86,8 @@ public class Enemy : MonoBehaviour
 		ren.enabled = true;
 		ren.sprite = deadEnemy;
 
-		// Increase the score by 100 points
-		//score.score += 100;
+		// Increase the score
+		PlayerControl.score += points;
 
 		// Set dead to true.
 		dead = true;

@@ -10,6 +10,9 @@ public class PlayerControl : MonoBehaviour
 
 	public AudioClip introSound;
 	public float introSoundVolume = 1.0f;
+	public static int score = 0;
+	public static int lives = 0;
+	public static int level = 0;
 
 	//public Transform groundCheck;
 	float groundRadius = 0.2f;
@@ -39,6 +42,8 @@ public class PlayerControl : MonoBehaviour
 
 	void Awake()
 	{
+		level = Application.loadedLevel;
+
 		// Setting up references.
 		groundCheck = transform.Find("groundCheckFront");
 		anim = GetComponent<Animator>();

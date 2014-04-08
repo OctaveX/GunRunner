@@ -149,7 +149,13 @@ public class PlayerHealth : MonoBehaviour
 		anim.SetTrigger("Die");
 
 		yield return new WaitForSeconds (3);
-		Application.LoadLevel(Application.loadedLevel);
+		PlayerControl.lives--;
+		if (PlayerControl.lives >= 0 ) Application.LoadLevel(Application.loadedLevel);
+		else
+		{
+			PlayerControl.level--;
+			Application.LoadLevel ("GameOver");
+		}
 	}
 
 	public void UpdateHealthBar ()

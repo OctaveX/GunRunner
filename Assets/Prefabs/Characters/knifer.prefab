@@ -240,6 +240,7 @@ MonoBehaviour:
   hundredPointsUI: {fileID: 0}
   deathSpinMin: -100
   deathSpinMax: 100
+  points: 200
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 0

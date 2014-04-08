@@ -11,8 +11,9 @@ public class EnemyFlyer : MonoBehaviour {
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
 	public float deathVolume = 1.0f;
-	private Animator anim;
+	public int points;
 
+	private Animator anim;
 	public Rigidbody2D rocket;				// Prefab of the rocket.
 	private float lastFireTime = 0f;
 	public float fireRate = 1f;
@@ -31,7 +32,6 @@ public class EnemyFlyer : MonoBehaviour {
 	
 	
 	private bool dead = false;			// Whether or not the enemy is dead.
-	private Score score;				// Reference to the Score script.
 	private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
 	
 	void Awake()
@@ -39,7 +39,6 @@ public class EnemyFlyer : MonoBehaviour {
 		// Setting up the references.
 		ren = transform.Find("body").GetComponent<SpriteRenderer>();
 		frontCheck = transform.Find("frontCheck").transform;
-		//score = GameObject.Find("Score").GetComponent<Score>();
 
 		//Reference to pickup spawner script
 		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
@@ -122,8 +121,8 @@ public class EnemyFlyer : MonoBehaviour {
 		ren.enabled = true;
 		ren.sprite = deadEnemy;
 		
-		// Increase the score by 100 points
-		//score.score += 100;
+		// Increase the score
+		PlayerControl.score += points;
 		
 		// Set dead to true.
 		dead = true;
