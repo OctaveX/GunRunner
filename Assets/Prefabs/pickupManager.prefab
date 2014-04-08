@@ -39,8 +39,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickups:
-  - {fileID: 100000, guid: f14f67cf21d1d440181dad13051efd97, type: 2}
   - {fileID: 100000, guid: 9124ba8225a274c91a8eb0e924019612, type: 2}
+  - {fileID: 100002, guid: 59d7dec945be643bebaddda5f482eeea, type: 2}
+  - {fileID: 100000, guid: e360db38b531d4deb85bf903240fe993, type: 2}
+  - {fileID: 100002, guid: e142865c2b40d4513a00cd81a7efe61b, type: 2}
   pickupDeliveryTime: 5
   dropRangeLeft: -15
   dropRangeRight: 15
