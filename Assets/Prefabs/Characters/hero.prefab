@@ -90,7 +90,6 @@ GameObject:
   - 58: {fileID: 5800000}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400004}
-  - 82: {fileID: 8200004}
   m_Layer: 9
   m_Name: hero
   m_TagString: Player
@@ -226,7 +225,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0457625389, y: -8.79321575, z: -1}
+  m_LocalPosition: {x: -15, y: -8.79321575, z: -1}
   m_LocalScale: {x: 1.20000005, y: 1.20000005, z: 1.20000005}
   m_Children:
   - {fileID: 400016}
@@ -329,7 +328,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 71c2c0e8ae6c44d459723bef91c9bbbf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .100000001
   m_Pitch: 1.10000002
   Loop: 0
   Mute: 0
@@ -435,64 +434,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!82 &8200004
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100020}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -532,6 +473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   jump: 0
+  introSound: {fileID: 8300000, guid: ec72200ab27bc40099d9ecaf1bf48eeb, type: 3}
+  introSoundVolume: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4096
@@ -539,9 +482,8 @@ MonoBehaviour:
   minJumpV: 10
   maxSpeed: 16
   jumpClips:
-  - {fileID: 8300000, guid: 50a8d8a939a0f4e77a0dac6ecd2e582b, type: 3}
-  - {fileID: 8300000, guid: fc55d077383484ac0ad66aa17fcd746f, type: 3}
-  - {fileID: 8300000, guid: dafa1cc4eb8714341a7c595abfba35d8, type: 3}
+  - {fileID: 8300000, guid: 0b8c06dfc9f4f47e19fd3204c54061c0, type: 3}
+  jumpVolume: .300000012
   taunts:
   - {fileID: 8300000, guid: 2d487c0108565443ba2dea29b521e120, type: 3}
   - {fileID: 8300000, guid: 27cbebf9d650249e5b032494eae5322c, type: 3}
@@ -562,10 +504,9 @@ MonoBehaviour:
   health: 100
   repeatDamagePeriod: .349999994
   ouchClips:
-  - {fileID: 8300000, guid: 16883b69910904c908f8738ee6d16a7f, type: 3}
-  - {fileID: 8300000, guid: 4825e9268b7c84159b1f2b9cb54850b1, type: 3}
-  - {fileID: 8300000, guid: c6cea8437a02b40b78dfaf913b99be0d, type: 3}
-  - {fileID: 8300000, guid: 4baef03e1cc8f4ab69708f3aedbce21c, type: 3}
+  - {fileID: 8300000, guid: 93fae69c5eb9144ccbaddb242491aecb, type: 3}
+  deathClips:
+  - {fileID: 8300000, guid: fc4d3d4f2e58d485c9c44ce66116db69, type: 3}
   hurtForce: 100
   damageAmount: 10
 --- !u!114 &11400008

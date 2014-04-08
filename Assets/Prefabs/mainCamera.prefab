@@ -40,7 +40,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .639215708, g: .733333349, b: .768627465, a: .0196078438}
+  m_BackGroundColor: {r: .00551471114, g: .274231195, b: .375, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -89,8 +89,8 @@ MonoBehaviour:
   yMargin: 2
   xSmooth: 2
   ySmooth: 2
-  maxXAndY: {x: 5, y: 5}
-  minXAndY: {x: -5, y: -5}
+  maxXAndY: {x: 100, y: 5}
+  minXAndY: {x: 0, y: 0}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

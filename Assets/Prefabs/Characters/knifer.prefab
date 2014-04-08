@@ -235,10 +235,9 @@ MonoBehaviour:
   deadEnemy: {fileID: 0}
   damagedEnemy: {fileID: 0}
   deathClips:
-  - {fileID: 8300000, guid: 039514349165244c6a43be5c3070d14b, type: 3}
-  - {fileID: 8300000, guid: 85020549641fa452d9136ac2fc852efd, type: 3}
-  - {fileID: 8300000, guid: 2e20b5071623f44cf9c72acf016de4b6, type: 3}
-  hundredPointsUI: {fileID: 100006, guid: 31974361bc9e44fb18c77b64a4cb3bbd, type: 2}
+  - {fileID: 8300000, guid: 0b2260e24fb1f45d6948d64fc91bd7a7, type: 3}
+  deathVolume: .600000024
+  hundredPointsUI: {fileID: 0}
   deathSpinMin: -100
   deathSpinMax: 100
   whatIsObstacle:

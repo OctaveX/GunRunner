@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 	public float health = 100f;					// The player's health.
 	public float repeatDamagePeriod = 2f;		// How frequently the player can be damaged.
 	public AudioClip[] ouchClips;				// Array of clips to play when the player is damaged.
+	public AudioClip[] deathClips;				// Array of clips to play when the player dies.
 	public float hurtForce = 10f;				// The force with which the player is pushed when hurt.
 	public float damageAmount = 10f;			// The amount of damage to take when enemies touch the player
 
@@ -143,7 +144,10 @@ public class PlayerHealth : MonoBehaviour
 
 	IEnumerator Die ()
 	{
+		int i = Random.Range (0, deathClips.Length);
+		AudioSource.PlayClipAtPoint(deathClips[0], transform.position, 3.0f);
 		anim.SetTrigger("Die");
+
 		yield return new WaitForSeconds (3);
 		Application.LoadLevel(Application.loadedLevel);
 	}

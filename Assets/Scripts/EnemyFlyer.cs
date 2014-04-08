@@ -10,7 +10,9 @@ public class EnemyFlyer : MonoBehaviour {
 	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
-	
+	public float deathVolume = 1.0f;
+	private Animator anim;
+
 	public Rigidbody2D rocket;				// Prefab of the rocket.
 	private float lastFireTime = 0f;
 	public float fireRate = 1f;
@@ -37,6 +39,7 @@ public class EnemyFlyer : MonoBehaviour {
 
 		//Reference to pickup spawner script
 		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
+		anim = transform.root.gameObject.GetComponent<Animator> ();
 	}
 
 	void Update(){
@@ -89,6 +92,7 @@ public class EnemyFlyer : MonoBehaviour {
 	{
 		// Reduce the number of hit points by one.
 		HP--;
+		anim.SetTrigger ("Hurt");
 	}
 	
 	void Death()
@@ -125,7 +129,7 @@ public class EnemyFlyer : MonoBehaviour {
 		
 		// Play a random audioclip from the deathClips array.
 		int i = Random.Range(0, deathClips.Length);
-		//AudioSource.PlayClipAtPoint(deathClips[i], transform.position);
+		AudioSource.PlayClipAtPoint(deathClips[i], transform.position, deathVolume);
 		
 		// Create a vector that is just above the enemy.
 		Vector3 scorePos;
@@ -133,7 +137,7 @@ public class EnemyFlyer : MonoBehaviour {
 		scorePos.y += 1.5f;
 		
 		// Instantiate the 100 points prefab at this point.
-		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
+		if(hundredPointsUI) Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 
 		pickupSpawner.DeliverPickup(transform.position);
 		Destroy(gameObject);

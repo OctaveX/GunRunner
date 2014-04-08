@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour {
 
 	public float maxSpeed = 10f;
 	bool facingRight = true;
+	public AudioClip introSound;
+	public float introSoundVolume = 1.0f;
 
 	Animator anim;
 
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
+		AudioSource.PlayClipAtPoint(introSound, transform.position, introSoundVolume);
 	}
 	
 	// Update is called once per frame

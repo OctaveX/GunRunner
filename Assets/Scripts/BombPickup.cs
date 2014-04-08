@@ -4,7 +4,8 @@ using System.Collections;
 public class BombPickup : MonoBehaviour
 {
 	public AudioClip pickupClip;		// Sound for when the bomb crate is picked up.
-	
+	public float volume;
+
 	private Animator anim;				// Reference to the animator component.
 	private bool landed = false;		// Whether or not the crate has landed yet.
 	public int gunNum;
@@ -21,7 +22,7 @@ public class BombPickup : MonoBehaviour
 		if(other.tag == "Player")
 		{
 			// ... play the pickup sound effect.
-			AudioSource.PlayClipAtPoint(pickupClip, transform.position);
+			AudioSource.PlayClipAtPoint(pickupClip, transform.position, volume);
 
 			Gun gun = other.GetComponentInChildren<Gun>();
 			gun.gunType = gunNum;
