@@ -123,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.67494202, y: -4.48582268, z: 0}
+  m_LocalPosition: {x: -2.09593344, y: -4.51878071, z: 0}
   m_LocalScale: {x: -1.20000005, y: 1.20000005, z: 1.20000005}
   m_Children:
   - {fileID: 400010}
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocket: {fileID: 5000000, guid: 33ba6775e037f432185651490cc350c0, type: 2}
   speed: 20
-  fireRate: .300000012
+  fireRate: 2
   canFire: 1
   isFiring: 0
 --- !u!114 &11400004

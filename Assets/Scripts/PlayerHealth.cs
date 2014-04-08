@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
 	private Vector3 healthScale;				// The local scale of the health bar initially (with full health).
 	private PlayerControl playerControl;		// Reference to the PlayerControl script.
 	private Animator anim;						// Reference to the Animator on the player
-
+	private GameObject gunObject;
 
 	void Awake ()
 	{
@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
 		playerControl = GetComponent<PlayerControl>();
 		healthBar = GameObject.Find("HealthBar").GetComponent<SpriteRenderer>();
 		anim = GetComponent<Animator>();
-
+		gunObject = GameObject.Find("Gun");
 		// Getting the intial scale of the healthbar (whilst the player has full health).
 		healthScale = healthBar.transform.localScale;
 	}
@@ -37,7 +37,8 @@ public class PlayerHealth : MonoBehaviour
 				{
 					// ... take damage and reset the lastHitTime.
 					TakeDamage(col.transform); 
-					lastHitTime = Time.time; 
+					lastHitTime = Time.time;
+					gunObject.GetComponent<Gun>().gunType = 0;
 				}
 				// If the player doesn't have health, do some stuff, let him fall into the river to reload the level.
 				else
@@ -83,7 +84,8 @@ public class PlayerHealth : MonoBehaviour
 				{
 					// ... take damage and reset the lastHitTime.
 					TakeDamage(col.transform); 
-					lastHitTime = Time.time; 
+					lastHitTime = Time.time;
+					gunObject.GetComponent<Gun>().gunType = 0;
 				}
 				// If the player doesn't have health, do some stuff, let him fall into the river to reload the level.
 				else

@@ -62,11 +62,11 @@ public class PickupSpawner : MonoBehaviour
 			// If the player's health is above the high threshold...
 			if(playerHealth.health >= highHealthThreshold)
 				// ... instantiate a bomb pickup at the drop position.
-				Instantiate(pickups[0], position, Quaternion.identity);
+				Instantiate(pickups[Random.Range(1,4)], position, Quaternion.identity);
 			// Otherwise if the player's health is below the low threshold...
 			else if(playerHealth.health <= lowHealthThreshold)
 				// ... instantiate a health pickup at the drop position.
-				Instantiate(pickups[1], position, Quaternion.identity);
+				Instantiate(pickups[0], position, Quaternion.identity);
 			// Otherwise...
 			else
 			{
