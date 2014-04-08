@@ -16,6 +16,7 @@ public class GameOver : MonoBehaviour {
 
 		GUI.Label (new Rect (0, 20, Screen.width, Screen.height), "Score: " + PlayerControl.score, smallStyle);
 		GUI.Label (new Rect (0, 40, Screen.width, Screen.height), "Levels Completed: " + (PlayerControl.level) + "/" + (Application.levelCount - 2), smallStyle);
+		GUI.Label (new Rect (0, 140, Screen.width, Screen.height), "'Fire' to continue...", smallStyle);
 	}
 
 	// Update is called once per frame
