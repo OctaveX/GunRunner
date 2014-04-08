@@ -103,18 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1266c771706874b968a2ef6724779fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreRect:
-    serializedVersion: 2
-    x: 5
-    y: 0
-    width: 100
-    height: 50
-  livesRect:
-    serializedVersion: 2
-    x: 5
-    y: 100
-    width: 100
-    height: 50
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

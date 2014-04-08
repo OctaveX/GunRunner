@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GameOver : MonoBehaviour {
-	
+
 	void OnGUI () {
 		GUIStyle bigStyle = GUI.skin.GetStyle("Label");
 		bigStyle.alignment = TextAnchor.MiddleCenter;
