@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 	public float health = 100f;					// The player's health.
 	public float repeatDamagePeriod = 2f;		// How frequently the player can be damaged.
 	public AudioClip[] ouchClips;				// Array of clips to play when the player is damaged.
+	public AudioClip[] deathClips;				// Array of clips to play when the player dies.
 	public float hurtForce = 10f;				// The force with which the player is pushed when hurt.
 	public float damageAmount = 10f;			// The amount of damage to take when enemies touch the player
 
@@ -64,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
 					GetComponentInChildren<Gun>().enabled = false;
 					
 					// ... Trigger the 'Die' animation state
-					anim.SetTrigger("Die");
+					StartCoroutine(Die());
 				}
 			}
 		}
@@ -74,7 +75,7 @@ public class PlayerHealth : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D col)
 	{
 		// If the colliding gameobject is an Enemy...
-		if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyFlyer")
+		if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyFlyer" || col.gameObject.tag == "EnemyGunner")
 		{
 			// ... and if the time exceeds the time of the last hit plus the time between hits...
 			if (Time.time > lastHitTime + repeatDamagePeriod) 
@@ -111,7 +112,7 @@ public class PlayerHealth : MonoBehaviour
 					GetComponentInChildren<Gun>().enabled = false;
 
 					// ... Trigger the 'Die' animation state
-					anim.SetTrigger("Die");
+					StartCoroutine(Die());
 				}
 			}
 		}
@@ -138,8 +139,18 @@ public class PlayerHealth : MonoBehaviour
 		// Play a random clip of the player getting hurt.
 		int i = Random.Range (0, ouchClips.Length);
 		AudioSource.PlayClipAtPoint(ouchClips[i], transform.position);
+		anim.SetTrigger ("Hurt");
 	}
 
+	IEnumerator Die ()
+	{
+		int i = Random.Range (0, deathClips.Length);
+		AudioSource.PlayClipAtPoint(deathClips[0], transform.position, 3.0f);
+		anim.SetTrigger("Die");
+
+		yield return new WaitForSeconds (3);
+		Application.LoadLevel(Application.loadedLevel);
+	}
 
 	public void UpdateHealthBar ()
 	{

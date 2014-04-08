@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 	public Sprite deadEnemy;			// A sprite of the enemy when it's dead.
 	public Sprite damagedEnemy;			// An optional sprite of the enemy when it's damaged.
 	public AudioClip[] deathClips;		// An array of audioclips that can play when the enemy dies.
+	public float deathVolume = 1.0f;
 	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
@@ -69,6 +70,7 @@ public class Enemy : MonoBehaviour
 	{
 		// Reduce the number of hit points by one.
 		HP--;
+		anim.SetTrigger ("Hurt");
 	}
 	
 	void Death()
@@ -92,10 +94,6 @@ public class Enemy : MonoBehaviour
 		// Set dead to true.
 		dead = true;
 
-		// Allow the enemy to rotate and spin it by adding a torque.
-		rigidbody2D.fixedAngle = false;
-		rigidbody2D.AddTorque(Random.Range(deathSpinMin,deathSpinMax));
-
 		// Find all of the colliders on the gameobject and set them all to be triggers.
 		Collider2D[] cols = GetComponents<Collider2D>();
 		foreach(Collider2D c in cols)
@@ -105,7 +103,7 @@ public class Enemy : MonoBehaviour
 
 		// Play a random audioclip from the deathClips array.
 		int i = Random.Range(0, deathClips.Length);
-		AudioSource.PlayClipAtPoint(deathClips[i], transform.position);
+		AudioSource.PlayClipAtPoint(deathClips[i], transform.position, deathVolume);
 
 		// Create a vector that is just above the enemy.
 		Vector3 scorePos;
@@ -113,10 +111,10 @@ public class Enemy : MonoBehaviour
 		scorePos.y += 1.5f;
 
 		// Instantiate the 100 points prefab at this point.
-		//Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
+		if(hundredPointsUI) Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 
 		pickupSpawner.DeliverPickup(transform.position);
-		Destroy(gameObject, .5f);
+		Destroy(gameObject, 0);
 	}
 
 

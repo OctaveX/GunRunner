@@ -18,7 +18,7 @@ public class EnemyRocket : MonoBehaviour {
 		Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
 		
 		// Instantiate the explosion where the rocket is with the random rotation.
-		Instantiate(explosion, transform.position, randomRotation);
+		if(explosion) Instantiate(explosion, transform.position, randomRotation);
 	}
 	
 	void OnTriggerEnter2D (Collider2D col) 

@@ -11,6 +11,7 @@ public class EnemyGunner : MonoBehaviour
 	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
+	public float deathVolume = 1.0f;
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
@@ -86,6 +87,7 @@ public class EnemyGunner : MonoBehaviour
 	{
 		// Reduce the number of hit points by one.
 		HP--;
+		anim.SetTrigger ("Hurt");
 	}
 	
 	void Death()
@@ -122,7 +124,7 @@ public class EnemyGunner : MonoBehaviour
 
 		// Play a random audioclip from the deathClips array.
 		int i = Random.Range(0, deathClips.Length);
-		AudioSource.PlayClipAtPoint(deathClips[i], transform.position);
+		AudioSource.PlayClipAtPoint(deathClips[i], transform.position, deathVolume);
 
 		// Create a vector that is just above the enemy.
 		Vector3 scorePos;
@@ -130,7 +132,7 @@ public class EnemyGunner : MonoBehaviour
 		scorePos.y += 1.5f;
 
 		// Instantiate the 100 points prefab at this point.
-		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
+		if(hundredPointsUI) Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 
 		pickupSpawner.DeliverPickup(transform.position);
 		Destroy(gameObject, 0);
