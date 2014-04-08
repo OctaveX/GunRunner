@@ -69,6 +69,7 @@ public class Enemy : MonoBehaviour
 	{
 		// Reduce the number of hit points by one.
 		HP--;
+		anim.SetTrigger ("Hurt");
 	}
 	
 	void Death()

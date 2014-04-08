@@ -59,7 +59,6 @@ public class EnemyGun : MonoBehaviour
 	
 	void Fire(){
 		// ... set the animator Shoot trigger parameter and play the audioclip.
-		anim.SetTrigger("Shoot");
 		audio.Play();
 		
 		// ... instantiate the rocket facing right and set it's velocity to the right. 
@@ -75,14 +74,14 @@ public class EnemyGun : MonoBehaviour
 		Transform barrel = transform.Find("enemyBarrel");
 
 		if(AimScript.facingRight){
-			bulletInstance = Instantiate(rocket, barrel.transform.position, barrel.transform.rotation) as Rigidbody2D;
-			bulletInstance.velocity = barrel.transform.rotation * temp;
+			bulletInstance = Instantiate(rocket, barrel.position, barrel.rotation) as Rigidbody2D;
+			bulletInstance.velocity = barrel.rotation * temp;
 		}
 		else{
-			bulletInstance = Instantiate(rocket, barrel.transform.position, Quaternion.Inverse(barrel.transform.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
+			bulletInstance = Instantiate(rocket, barrel.position, Quaternion.Inverse(barrel.rotation) * Quaternion.Euler(0, 0, 180)) as Rigidbody2D;
 //			bullet = (Rocket)bulletInstance.GetComponent("Rocket");
 //			bullet.bulletRange = .2f;
-			bulletInstance.velocity = Quaternion.Inverse(barrel.transform.rotation) * -temp;
+			bulletInstance.velocity = Quaternion.Inverse(barrel.rotation) * -temp;
 		}
 	}
 }

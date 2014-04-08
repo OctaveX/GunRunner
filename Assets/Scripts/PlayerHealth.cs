@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
 					GetComponentInChildren<Gun>().enabled = false;
 					
 					// ... Trigger the 'Die' animation state
-					anim.SetTrigger("Die");
+					StartCoroutine(Die());
 				}
 			}
 		}
@@ -74,7 +74,7 @@ public class PlayerHealth : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D col)
 	{
 		// If the colliding gameobject is an Enemy...
-		if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyFlyer")
+		if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyFlyer" || col.gameObject.tag == "EnemyGunner")
 		{
 			// ... and if the time exceeds the time of the last hit plus the time between hits...
 			if (Time.time > lastHitTime + repeatDamagePeriod) 
@@ -111,7 +111,7 @@ public class PlayerHealth : MonoBehaviour
 					GetComponentInChildren<Gun>().enabled = false;
 
 					// ... Trigger the 'Die' animation state
-					anim.SetTrigger("Die");
+					StartCoroutine(Die());
 				}
 			}
 		}
@@ -138,8 +138,15 @@ public class PlayerHealth : MonoBehaviour
 		// Play a random clip of the player getting hurt.
 		int i = Random.Range (0, ouchClips.Length);
 		AudioSource.PlayClipAtPoint(ouchClips[i], transform.position);
+		anim.SetTrigger ("Hurt");
 	}
 
+	IEnumerator Die ()
+	{
+		anim.SetTrigger("Die");
+		yield return new WaitForSeconds (3);
+		Application.LoadLevel(Application.loadedLevel);
+	}
 
 	public void UpdateHealthBar ()
 	{
