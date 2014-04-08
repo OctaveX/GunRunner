@@ -418,7 +418,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 266781099}
   - 212: {fileID: 266781101}
-  - 82: {fileID: 266781100}
   m_Layer: 9
   m_Name: body
   m_TagString: Untagged
@@ -437,65 +436,6 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 757719616}
---- !u!82 &266781100
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 8200002, guid: 6aa187bc6339843479c03fdfd71404a3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1751463959}
-  m_GameObject: {fileID: 266781098}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: f7f44450152044d2b9fce9c34b2a54a6, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!212 &266781101
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1219,6 +1159,10 @@ Prefab:
       propertyPath: m_Name
       value: endLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 4df3bc930f0d44b4991060243c91f898, type: 2}
+      propertyPath: clipVolume
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4df3bc930f0d44b4991060243c91f898, type: 2}
   m_RootGameObject: {fileID: 1826239655}
@@ -1390,6 +1334,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: feff25051161e4a7d886804a81261544, type: 2}
+      propertyPath: m_Volume
+      value: .200000003
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: feff25051161e4a7d886804a81261544, type: 2}
   m_RootGameObject: {fileID: 1737610650}
@@ -1490,8 +1438,10 @@ MonoBehaviour:
   repeatDamagePeriod: .349999994
   ouchClips:
   - {fileID: 8300000, guid: 93fae69c5eb9144ccbaddb242491aecb, type: 3}
+  ouchClipVolume: 1
   deathClips:
   - {fileID: 8300000, guid: fc4d3d4f2e58d485c9c44ce66116db69, type: 3}
+  deathClipVolume: .200000003
   hurtForce: 100
   damageAmount: 10
 --- !u!95 &757719620
@@ -1564,7 +1514,7 @@ MonoBehaviour:
   facingRight: 1
   jump: 0
   introSound: {fileID: 8300000, guid: ec72200ab27bc40099d9ecaf1bf48eeb, type: 3}
-  introSoundVolume: 1
+  introSoundVolume: .400000006
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4096
@@ -1573,7 +1523,7 @@ MonoBehaviour:
   maxSpeed: 16
   jumpClips:
   - {fileID: 8300000, guid: 0b8c06dfc9f4f47e19fd3204c54061c0, type: 3}
-  jumpVolume: .300000012
+  jumpVolume: .0500000007
   taunts:
   - {fileID: 8300000, guid: 2d487c0108565443ba2dea29b521e120, type: 3}
   - {fileID: 8300000, guid: 27cbebf9d650249e5b032494eae5322c, type: 3}
@@ -2714,7 +2664,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 71c2c0e8ae6c44d459723bef91c9bbbf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
+  m_Volume: .200000003
   m_Pitch: 1.10000002
   Loop: 0
   Mute: 0
@@ -2989,7 +2939,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 71c2c0e8ae6c44d459723bef91c9bbbf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
+  m_Volume: .300000012
   m_Pitch: 1.10000002
   Loop: 0
   Mute: 0
@@ -3373,7 +3323,24 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11400002, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
+      propertyPath: introSoundVolume
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
+      propertyPath: m_Volume
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
+      propertyPath: deathClipVolume
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
+      propertyPath: jumpVolume
+      value: .0500000007
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8200002, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
   m_RootGameObject: {fileID: 757719615}
   m_IsPrefabParent: 0
@@ -3597,6 +3564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishClip: {fileID: 8300000, guid: 01bc7890cf1084e0facc2913d3900b69, type: 3}
+  clipVolume: .400000006
 --- !u!1 &1939594441
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using System.Collections;
 public class EndLevel : MonoBehaviour {
 
 	public AudioClip finishClip;
+	public float clipVolume = 1.0f;
 	private bool finished = false;
 
 	void OnTriggerEnter2D (Collider2D other)
@@ -18,7 +19,7 @@ public class EndLevel : MonoBehaviour {
 	IEnumerator Finish ()
 	{
 		finished = true;
-		AudioSource.PlayClipAtPoint(finishClip, transform.position);
+		AudioSource.PlayClipAtPoint(finishClip, transform.position, clipVolume);
 		GameObject.Find ("hero").GetComponent<PlayerControl> ().enabled = false;
 		PlayerControl.score += PlayerControl.runningScore;
 		PlayerControl.runningScore = 0;
