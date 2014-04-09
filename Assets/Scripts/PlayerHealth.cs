@@ -43,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D col)
 	{
 		// If there has been enough time since a previous hit, and the player still has health, then take damage
-		if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyFlyer" || col.gameObject.tag == "EnemyGunner")
+		if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyFlyer" || col.gameObject.tag == "EnemyGunner" || col.gameObject.tag == "Spike")
 		{
 			AttackPlayer(col.transform);
 		}
