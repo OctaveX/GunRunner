@@ -360,9 +360,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   jump: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 4096
   maxJumpV: 20
   minJumpV: 10
   maxSpeed: 16
@@ -403,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9bf156813c141e98b61835f46356f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletRigidBody: {fileID: 0}
+  bulletRigidBody: {fileID: 5000000, guid: 8fde8ec1b330d4bbfb4839f4b41cadc0, type: 2}
   speed: 20
   gunType: 0
 --- !u!212 &21200020
