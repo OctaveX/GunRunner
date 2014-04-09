@@ -4,7 +4,7 @@ using System.Collections;
 public class GuiOverlay : MonoBehaviour {
 
 	void OnGUI () {
-
+		// Draw the player's current score, lives left, and current level
 		GUIStyle style = GUI.skin.GetStyle("Label");
 		style.alignment = TextAnchor.MiddleLeft;
 		style.fontSize = 15;

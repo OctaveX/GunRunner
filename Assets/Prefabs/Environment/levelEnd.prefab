@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishClip: {fileID: 8300000, guid: 01bc7890cf1084e0facc2913d3900b69, type: 3}
+  clipVolume: .400000006
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

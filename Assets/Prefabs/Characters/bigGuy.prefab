@@ -189,18 +189,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   HP: 5
-  deadEnemy: {fileID: 0}
-  damagedEnemy: {fileID: 0}
   deathClips:
   - {fileID: 8300000, guid: 0b2260e24fb1f45d6948d64fc91bd7a7, type: 3}
   deathVolume: .600000024
-  hundredPointsUI: {fileID: 0}
-  deathSpinMin: -100
-  deathSpinMax: 100
   points: 500
-  whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 4096
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -257,7 +257,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 71c2c0e8ae6c44d459723bef91c9bbbf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
+  m_Volume: .200000003
   m_Pitch: 1.10000002
   Loop: 0
   Mute: 0
@@ -332,18 +332,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   HP: 3
-  deadEnemy: {fileID: 0}
-  damagedEnemy: {fileID: 0}
   deathClips:
   - {fileID: 8300000, guid: 0b2260e24fb1f45d6948d64fc91bd7a7, type: 3}
-  hundredPointsUI: {fileID: 0}
-  deathSpinMin: -100
-  deathSpinMax: 100
   deathVolume: .600000024
   points: 300
-  whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 4096
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -355,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691eec24b44e247a9aee893933496500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocket: {fileID: 5000000, guid: 33ba6775e037f432185651490cc350c0, type: 2}
+  bullet: {fileID: 5000000, guid: 33ba6775e037f432185651490cc350c0, type: 2}
   speed: 20
   fireRate: 2
   canFire: 1

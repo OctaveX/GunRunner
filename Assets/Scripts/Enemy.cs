@@ -3,114 +3,64 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-	public float moveSpeed = 2f;		// The speed the enemy moves at.
-	public int HP = 2;					// How many times the enemy can be hit before it dies.
-	public Sprite deadEnemy;			// A sprite of the enemy when it's dead.
-	public Sprite damagedEnemy;			// An optional sprite of the enemy when it's damaged.
-	public AudioClip[] deathClips;		// An array of audioclips that can play when the enemy dies.
-	public float deathVolume = 1.0f;
-	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
-	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
-	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
-	public int points;
+	public float moveSpeed = 2f;		// Enemy speed
+	public int HP = 2;					// The enemy's Hit Point count
+	public AudioClip[] deathClips;		// An array of audioclips that can play when the enemy dies
+	public float deathVolume = 1.0f;	// The volume to play the death clip at
+	public int points;					// The number of points to award the player after defeating the enemy
 
-	private Animator anim;
-	private SpriteRenderer ren;			// Reference to the sprite renderer.
-	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
-	float frontRadius = 0.2f;
-	public LayerMask whatIsObstacle;
-	private bool blocked = false;
-	private bool frontGrounded = false;
+	protected Animator anim;			// Reference to the enemy's animator
+	protected bool blocked = false;		// A flag indicating whether or not the enemy has run into a wall or not	
+	protected bool frontGrounded = false;// A flag indicating whether or not the eneny is about to walk off a platform
+	protected bool dead = false;		// Whether or not the enemy is dead
+	protected PickupSpawner pickupSpawner;// Reference to the pickup spawner
 	
-	private bool dead = false;			// Whether or not the enemy is dead.
-	private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
-	
-	void Awake()
+	protected void Awake()
 	{
-		// Setting up the references.
-		ren = transform.Find("body").GetComponent<SpriteRenderer>();
-		frontCheck = transform.Find("frontCheck").transform;
-
-		//Reference to pickup spawner script
 		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
 		anim = transform.root.gameObject.GetComponent<Animator> ();
 	}
 
 	void FixedUpdate ()
 	{
-		// Create an array of all the colliders in front of the enemy.
-		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, 1);
-
 		blocked = Physics2D.Linecast(transform.position, transform.Find("frontCheck").position, 1 << LayerMask.NameToLayer("Ground"));
-
 		frontGrounded = Physics2D.Linecast(transform.position, transform.Find("frontGroundCheck").position, 1 << LayerMask.NameToLayer("Ground"));
 
-		if((blocked || !frontGrounded)&& !dead){
-				// ... Flip the enemy and stop checking the other colliders.
+		if((blocked || !frontGrounded)&& !dead)
 				Flip ();
-		}
-		// Set the enemy's velocity to moveSpeed in the x direction.
+
+		// Set the enemy's velocity
 		rigidbody2D.velocity = new Vector2(transform.localScale.x * moveSpeed, rigidbody2D.velocity.y);	
 		anim.SetFloat("enemySpeed", Mathf.Abs(rigidbody2D.velocity.x));
-
-		// If the enemy has one hit point left and has a damagedEnemy sprite...
-		if(HP == 1 && damagedEnemy != null)
-			// ... set the sprite renderer's sprite to be the damagedEnemy sprite.
-			ren.sprite = damagedEnemy;
 			
-		// If the enemy has zero or fewer hit points and isn't dead yet...
+		// Kill the enemy if their HP has reached zero or below
 		if(HP <= 0 && !dead)
-			// ... call the death function.
 			Death ();
 	}
 	
 	public void Hurt()
 	{
-		// Reduce the number of hit points by one.
 		HP--;
 		anim.SetTrigger ("Hurt");
 	}
 	
-	void Death()
+	protected void Death()
 	{
-		// Find all of the sprite renderers on this object and it's children.
-		SpriteRenderer[] otherRenderers = GetComponentsInChildren<SpriteRenderer>();
-
-		// Disable all of them sprite renderers.
-		foreach(SpriteRenderer s in otherRenderers)
-		{
-			s.enabled = false;
-		}
-
-		// Re-enable the main sprite renderer and set it's sprite to the deadEnemy sprite.
-		ren.enabled = true;
-		ren.sprite = deadEnemy;
-
-		// Increase the score
-		PlayerControl.runningScore += points;
-
-		// Set dead to true.
 		dead = true;
 
-		// Find all of the colliders on the gameobject and set them all to be triggers.
+		// Increase the player's running score for this level
+		PlayerControl.runningScore += points;
+
+		// Find all of the colliders on the gameobject and set them all to be triggers
 		Collider2D[] cols = GetComponents<Collider2D>();
 		foreach(Collider2D c in cols)
 		{
 			c.isTrigger = true;
 		}
 
-		// Play a random audioclip from the deathClips array.
+		// Play a clip from the list of possible death clips, spawn a pickup, and destroy the enemy object
 		int i = Random.Range(0, deathClips.Length);
 		AudioSource.PlayClipAtPoint(deathClips[i], transform.position, deathVolume);
-
-		// Create a vector that is just above the enemy.
-		Vector3 scorePos;
-		scorePos = transform.position;
-		scorePos.y += 1.5f;
-
-		// Instantiate the 100 points prefab at this point.
-		if(hundredPointsUI) Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
-
 		pickupSpawner.DeliverPickup(transform.position);
 		Destroy(gameObject, 0);
 	}
@@ -118,7 +68,6 @@ public class Enemy : MonoBehaviour
 
 	public void Flip()
 	{
-		// Multiply the x component of localScale by -1.
 		Vector3 enemyScale = transform.localScale;
 		enemyScale.x *= -1;
 		transform.localScale = enemyScale;

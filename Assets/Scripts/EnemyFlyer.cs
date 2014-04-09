@@ -1,49 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyFlyer : MonoBehaviour {
-	public float moveSpeed = 2f;		// The speed the enemy moves at.
-	public int HP = 2;					// How many times the enemy can be hit before it dies.
-	public Sprite deadEnemy;			// A sprite of the enemy when it's dead.
-	public Sprite damagedEnemy;			// An optional sprite of the enemy when it's damaged.
-	public AudioClip[] deathClips;		// An array of audioclips that can play when the enemy dies.
-	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
-	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
-	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
-	public float deathVolume = 1.0f;
-	public int points;
+public class EnemyFlyer : Enemy
+{
 
-	private Animator anim;
-	public Rigidbody2D rocket;				// Prefab of the rocket.
-	private float lastFireTime = 0f;
-	public float fireRate = 1f;
-	private bool canFire = true;
+	public Rigidbody2D rocket;			// Enemy rocket prefab
+	public float fireRate = 1f;			// The rate at which the flyer can drop rockets
 
-	private float travelTime = 2f;
-	private float lastFlipTime;
-	private bool canFlip = false;
-
-	private SpriteRenderer ren;			// Reference to the sprite renderer.
-	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
-	float frontRadius = 0.2f;
-	public LayerMask whatIsObstacle;
-	private bool blocked = false;
-	private bool frontGrounded = false;
-	
-	
-	private bool dead = false;			// Whether or not the enemy is dead.
-	private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
-	
-	void Awake()
-	{
-		// Setting up the references.
-		ren = transform.Find("body").GetComponent<SpriteRenderer>();
-		frontCheck = transform.Find("frontCheck").transform;
-
-		//Reference to pickup spawner script
-		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
-		anim = transform.root.gameObject.GetComponent<Animator> ();
-	}
+	private bool canFire = true;		// A flag to signal whether or not the flyer can drop bombs
+	private float lastFireTime = 0f;	// The last time that a rocket was dropped
+	private float travelTime = 2f;		// The amount of time to fly before flipping
+	private float lastFlipTime;			// The last time that the flyer was flipped
+	private bool canFlip = false;		// A flag to signal whether or not the flyer can flip horizontally
 
 	void Update(){
 		if(Time.time > lastFireTime + fireRate) {
@@ -58,9 +26,6 @@ public class EnemyFlyer : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		// Create an array of all the colliders in front of the enemy.
-		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, 1);
-		
 		blocked = Physics2D.Linecast(transform.position, transform.Find("frontCheck").position, 1 << LayerMask.NameToLayer("Ground"));
 
 		if(Time.time > lastFlipTime + travelTime) {
@@ -68,99 +33,25 @@ public class EnemyFlyer : MonoBehaviour {
 		}
 
 		if(blocked || canFlip){
-			// ... Flip the enemy and stop checking the other colliders.
 			Flip ();
 			lastFlipTime = Time.time;
 			canFlip = false;
 		}
-		// Set the enemy's velocity to moveSpeed in the x direction.
+
 		rigidbody2D.velocity = new Vector2(transform.localScale.x * moveSpeed, 0f);	
-		
-		// If the enemy has one hit point left and has a damagedEnemy sprite...
-		if(HP == 1 && damagedEnemy != null)
-			// ... set the sprite renderer's sprite to be the damagedEnemy sprite.
-			ren.sprite = damagedEnemy;
-		
-		// If the enemy has zero or fewer hit points and isn't dead yet...
+
 		if(HP <= 0 && !dead)
-			// ... call the death function.
 			Death ();
 	}
 
 	void Fire(){
 		Rigidbody2D bulletInstance;
 		Vector3 temp = new Vector3(0, -5f);
-		
 		Vector3 launchPoint = new Vector3(transform.position.x, transform.position.y - 1);
 
-		bulletInstance = Instantiate(rocket, launchPoint, transform.rotation * Quaternion.Euler(0, 0, -180)) as Rigidbody2D;
-		EnemyRocket bullet = (EnemyRocket)bulletInstance.GetComponent("EnemyRocket");
+		bulletInstance = (Rigidbody2D)Instantiate(rocket, launchPoint, transform.rotation * Quaternion.Euler(0, 0, -180));
+		EnemyProjectile bullet = bulletInstance.GetComponent<EnemyProjectile>();
 		bullet.bulletRange = 5f;
 		bulletInstance.velocity = transform.rotation * temp;
 	}
-
-	public void Hurt()
-	{
-		// Reduce the number of hit points by one.
-		HP--;
-		anim.SetTrigger ("Hurt");
-	}
-	
-	void Death()
-	{
-		// Find all of the sprite renderers on this object and it's children.
-		SpriteRenderer[] otherRenderers = GetComponentsInChildren<SpriteRenderer>();
-		
-		// Disable all of them sprite renderers.
-		foreach(SpriteRenderer s in otherRenderers)
-		{
-			s.enabled = false;
-		}
-		
-		// Re-enable the main sprite renderer and set it's sprite to the deadEnemy sprite.
-		ren.enabled = true;
-		ren.sprite = deadEnemy;
-		
-		// Increase the score
-		PlayerControl.runningScore += points;
-		
-		// Set dead to true.
-		dead = true;
-		
-		// Allow the enemy to rotate and spin it by adding a torque.
-		rigidbody2D.fixedAngle = false;
-		rigidbody2D.AddTorque(Random.Range(deathSpinMin,deathSpinMax));
-		
-		// Find all of the colliders on the gameobject and set them all to be triggers.
-		Collider2D[] cols = GetComponents<Collider2D>();
-		foreach(Collider2D c in cols)
-		{
-			c.isTrigger = true;
-		}
-		
-		// Play a random audioclip from the deathClips array.
-		int i = Random.Range(0, deathClips.Length);
-		AudioSource.PlayClipAtPoint(deathClips[i], transform.position, deathVolume);
-		
-		// Create a vector that is just above the enemy.
-		Vector3 scorePos;
-		scorePos = transform.position;
-		scorePos.y += 1.5f;
-		
-		// Instantiate the 100 points prefab at this point.
-		if(hundredPointsUI) Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
-
-		pickupSpawner.DeliverPickup(transform.position);
-		Destroy(gameObject);
-	}
-	
-	
-	public void Flip()
-	{
-		// Multiply the x component of localScale by -1.
-		Vector3 enemyScale = transform.localScale;
-		enemyScale.x *= -1;
-		transform.localScale = enemyScale;
-	}
-
 }

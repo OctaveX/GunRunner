@@ -48,7 +48,7 @@ MonoBehaviour:
   dropRangeRight: 15
   highHealthThreshold: 75
   lowHealthThreshold: 25
-  dropRate: 1
+  dropRate: .25
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

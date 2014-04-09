@@ -10,16 +10,13 @@ public class CameraFollow : MonoBehaviour
 	public Vector2 maxXAndY;		// The maximum x and y coordinates the camera can have.
 	public Vector2 minXAndY;		// The minimum x and y coordinates the camera can have.
 
-
 	private Transform player;		// Reference to the player's transform.
-
-
+	
 	void Awake ()
 	{
 		// Setting up the reference.
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 	}
-
 
 	bool CheckXMargin()
 	{
@@ -27,19 +24,16 @@ public class CameraFollow : MonoBehaviour
 		return Mathf.Abs(transform.position.x - player.position.x) > xMargin;
 	}
 
-
 	bool CheckYMargin()
 	{
 		// Returns true if the distance between the camera and the player in the y axis is greater than the y margin.
 		return Mathf.Abs(transform.position.y - player.position.y) > yMargin;
 	}
 
-
 	void FixedUpdate ()
 	{
 		TrackPlayer();
 	}
-	
 	
 	void TrackPlayer ()
 	{
