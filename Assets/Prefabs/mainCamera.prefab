@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.42825317, y: -.151842594, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   yMargin: 2
   xSmooth: 2
   ySmooth: 2
-  maxXAndY: {x: 100, y: 5}
+  maxXAndY: {x: 1000, y: 0}
   minXAndY: {x: 0, y: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -103,18 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1266c771706874b968a2ef6724779fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreRect:
-    serializedVersion: 2
-    x: 5
-    y: 0
-    width: 100
-    height: 50
-  livesRect:
-    serializedVersion: 2
-    x: 5
-    y: 100
-    width: 100
-    height: 50
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

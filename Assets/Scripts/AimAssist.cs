@@ -11,16 +11,6 @@ public class AimAssist : MonoBehaviour {
 		
 		mouse_pos.x = mouse_pos.x - player_pos.x;
 		mouse_pos.y = mouse_pos.y - player_pos.y;
-		
-		if(facingRight){
-			float angle = Mathf.Atan2 (mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-			this.transform.localRotation = Quaternion.Euler (new Vector3(0, 0, angle));
-		}
-		else{
-			float angle = Mathf.Atan2 (mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-			this.transform.localRotation = Quaternion.Euler (new Vector3(0, 0, -angle - 180));
-		}
-
 
 		//Debug.Log(mouse_pos.x + " " + transform.position.x);
 		//If the input is moving the player right and the player is facing left...
@@ -31,6 +21,15 @@ public class AimAssist : MonoBehaviour {
 		else if(mouse_pos.x < transform.position.x && facingRight)
 			// ... flip the player.
 			Flip();
+		
+		if(facingRight){
+			float angle = Mathf.Atan2 (mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+			this.transform.localRotation = Quaternion.Euler (new Vector3(0, 0, angle));
+		}
+		else{
+			float angle = Mathf.Atan2 (mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+			this.transform.localRotation = Quaternion.Euler (new Vector3(0, 0, -angle - 180));
+		}
 
 
 		/*Testing aiming with thumbsticks*/
